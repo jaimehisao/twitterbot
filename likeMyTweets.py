@@ -2,18 +2,22 @@ from config import create_api
 import tweepy
 import logging
 import time
+import pprint
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
+#Method will fetch tweets and then iterate over them to like them, though this will quickly exahust
+#the API Request Limit for starter users
 def likeMyTweets(api, since_id):
-    logger.info("Retrieving Tweets from myself...")
-    for tweet in tweepy.Cursor(api.mentions_timeline).items():
-        print(tweet.user.name)
-        if(tweet.user.name == '@' + api.me().screen_name):
-            print('yes')
-            print(tweet.text.lower())
-            print(tweet.user.name)
+    logger.info("Retrieving Tweets and finding myself...")
+    for tweet in tweepy.Cursor(api.home_timeline).items():
+        if(tweet.user.screen_name == 'JHisao'):
+                try:
+                        api.create_favorite(tweet.id)
+                        print('Tweet with ', tweet.id, "liked!")
+                except tweepy.TweepError:
+                        print("You've already liked this tweet...")
 
 
 def main():
@@ -26,4 +30,7 @@ def main():
         time.sleep(60)
 
 if __name__ == "__main__":
-    main()
+        try:
+                 main()
+        except KeyboardInterrupt:
+                print('\nGoodbye!')
