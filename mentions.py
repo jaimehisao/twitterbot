@@ -1,3 +1,9 @@
+'''
+mentions.py by Jaime Hisao Yesaki 
+This program checks if the bot was mentioned in Twitter and interacts with the user depending on the query.
+Created August 1, 2019
+Version 1.1
+'''
 from config import create_api
 import tweepy
 import logging
@@ -24,6 +30,7 @@ def check_mentions(api, keywords, since_id):
 
 
 def handleMentions():
+    #Implement File Reading and Writing for Tweets, both from me and from others...
     print()
 
 def main():

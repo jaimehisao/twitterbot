@@ -1,3 +1,10 @@
+'''
+likeMyTweets.py by Jaime Hisao Yesaki 
+This program likes my own tweets and of other certain users that request it through the bot itself.
+Created August 1, 2019
+Version 1.1
+'''
+
 from config import create_api
 import tweepy
 import logging

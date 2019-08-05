@@ -1,3 +1,9 @@
+'''
+followBack.py by Jaime Hisao Yesaki 
+This program follows and unfollows automatically the users of the bot.
+Created August 1, 2019
+Version 1.1
+'''
 from config import create_api
 import tweepy
 import logging
@@ -6,17 +12,20 @@ import time
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
-def followBack(api):
-    for follower in tweepy.Cursor(api.followers).items():
-        follower.follow()
-        logger.info("User: {follower} has been followed!")
-
-
 def follow():
+        api = create_api()
+        #since_id = 1
+        for follower in tweepy.Cursor(api.followers, count = 100).items():
+                follower.follow()
+                logger.info("User: {follower} has been followed!")
+
+
+def unfollow():
     api = create_api()
-    since_id = 1
-    while True:
-        print(since_id)
-        followBack(api)
-        logger.info("Waiting for next program run...")
-        time.sleep(60)
+    #since_id = 1
+    for follower in tweepy.Cursor(api.followers, count = 100).items():
+            if follower.destroy_friendship:
+                    api.destroy_friendship(follower.id)
+                    logger.info("User: {follower} has been unfollowed!")
+
+
