@@ -23,6 +23,9 @@ def check_mentions(api, keywords, since_id):
     return new_since_id
 
 
+def handleMentions():
+    print()
+
 def main():
     api = create_api()
     since_id = 1

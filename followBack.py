@@ -12,7 +12,7 @@ def followBack(api):
         logger.info("User: {follower} has been followed!")
 
 
-def main():
+def follow():
     api = create_api()
     since_id = 1
     while True:
@@ -20,6 +20,3 @@ def main():
         followBack(api)
         logger.info("Waiting for next program run...")
         time.sleep(60)
-
-if __name__ == "__main__":
-    main()

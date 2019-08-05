@@ -20,7 +20,7 @@ def likeMyTweets(api, since_id):
                         print("You've already liked this tweet...")
 
 
-def main():
+def likeMTweets():
     api = create_api()
     since_id = 1
     while True:
@@ -28,9 +28,3 @@ def main():
         likeMyTweets(api, since_id)
         logger.info("Waiting for next program run...")
         time.sleep(60)
-
-if __name__ == "__main__":
-        try:
-                 main()
-        except KeyboardInterrupt:
-                print('\nGoodbye!')
