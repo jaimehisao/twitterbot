@@ -7,6 +7,12 @@ followers.
 The bot runs the tasks at specific times during a day to prevent errors and rate limiting from Twitter's API.
 
 
+## How does this project work?
+Using various open source libraries this project can achieve its given objectives. The program connects to the Twitter API at 
+set times during the day to download tweets and interact with users. 
+
+The Project uses libraries like Tweepy to serve as a Twitter API Wrapper and textgenrnn to generate random tweets.
+
 ### Project ToDo's 
 
 - Sync Follower & Tweet list locally to reduce the number of queries to Twitter's API
