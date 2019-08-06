@@ -1,4 +1,4 @@
-### TwitterBot
+# TwitterBot
 
 ## Project Objective
 Create a simple bot that runs at specific times during the day to do simple tasks, such as replies, likes, and follows to its 
