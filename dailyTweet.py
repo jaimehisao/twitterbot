@@ -63,7 +63,8 @@ def generateTweet():
     textgen = textgenrnn(name= "JHisao_twitter")
 
     textgen.train_new_model(texts, context_labels = contextLabels, gen_epochs = 200, batch_size = 128, train_size= 1.28, rnn_layers = 2, rnn_size = 128, rnn_bidirectional = False, max_length = 40, dim_embeddings = 100, word_level = False)
-    
+
+    textgen.generate()
 
 
 #Use file with stored Tweets to reduce API strain?
