@@ -1,3 +1,10 @@
+'''
+config.py by Jaime Hisao Yesaki 
+This python module returns the API authentication object from enviroment variables that are set
+in the computer, then this object can be shared among other program modules.
+Created August 2, 2019
+Version 1.0
+'''
 import tweepy
 import logging
 import os
