@@ -70,6 +70,6 @@ def generateTweet():
 def dailyBasedTweet():
     print()
     #textgen = generateTweet()
-    textgen = textgenrnn(name= "JHisao_twitter")
+    textgen = textgenrnn('JHisao_twitter_weights.hdf5')
 
     textgen.generate_samples()
