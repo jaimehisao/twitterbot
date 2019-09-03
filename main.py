@@ -3,7 +3,7 @@ main.py by Jaime Hisao Yesaki
 This program uses the other members of the project to execute actions at given times of the day to
 avoid API bans and rate limiting.
 Created August 1, 2019
-Version 1.1
+Version 1.2
 '''
 import schedule #To run code at specific intervals
 import time #To handle and calculate time
