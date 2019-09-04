@@ -14,10 +14,10 @@ from mentions import handleMentions
 #from dailyTweet import dailyBasedTweet
 
 #Scheduling for tasks that the bot has tu run
-schedule.every().hour.at(":24").do(follow) #Follows Back users that follow the bot
-schedule.every().day.at("01:01").do(unfollow) #Unfollows users that follow the bot
-schedule.every().day.at("18:00").do(likeMTweets) #Likes my other account's tweets
-schedule.every().hour.at(":40").do(handleMentions) #Handles Tweet Mentions
+schedule.every().hour.at(":20").do(follow) #Follows Back users that follow the bot
+schedule.every().day.at("01:10").do(unfollow) #Unfollows users that follow the bot
+schedule.every().hour.at(":40").do(likeMTweets) #Likes my other (main) account's tweets
+schedule.every().hour.at(":59").do(handleMentions) #Handles Tweet Mentions
 #schedule.every().day.at("09:00").do(dailyBasedTweet) #Handles Every Day Tweet
 
 while True:
