@@ -20,6 +20,7 @@ schedule.every().hour.at(":50").do(likeMTweets) #Likes my other (main) account's
 schedule.every().hour.at(":05").do(handleMentions) #Handles Tweet Mentions
 #schedule.every().day.at("09:00").do(dailyBasedTweet) #Handles Every Day Tweet
 
+#This will run always, checking the scheduler to see if a piece of code has to run at the specified hour and minute, otherwise, go to sleep
 while True:
     schedule.run_pending()
     time.sleep(1)
