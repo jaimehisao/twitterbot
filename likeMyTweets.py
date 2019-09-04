@@ -18,20 +18,18 @@ logger = logging.getLogger()
 #the API Request Limit for starter users
 def likeMyTweets(api, since_id):
     logger.info("Retrieving Tweets and finding myself...")
-    for tweet in tweepy.Cursor(api.home_timeline).items():
+    for tweet in tweepy.Cursor(api.home_timeline, count = 20).items():
         if(tweet.user.screen_name == 'JHisao'):
                 try:
                         api.create_favorite(tweet.id)
-                        print('Tweet with ', tweet.id, "liked!")
+                        toSend = 'Tweet with ', tweet.id, "liked!"
+                        logger.info(toSend)
                 except tweepy.TweepError:
-                        print("You've already liked this tweet...")
+                        logger.info("You've already liked this tweet...")
 
-
+#Method that creates the API object to connect to Twitter and then proceeds to call the likeMyTweets Function
 def likeMTweets():
     api = create_api()
     since_id = 1
     while True:
-        print(since_id)
         likeMyTweets(api, since_id)
-        logger.info("Waiting for next program run...")
-        time.sleep(60)
