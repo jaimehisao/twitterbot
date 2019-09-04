@@ -31,7 +31,12 @@ def check_mentions(api, keywords, since_id):
 
 def handleMentions():
     #Implement File Reading and Writing for Tweets, both from me and from others...
-    print()
+    api = create_api()
+    since_id = 1
+    while True:
+        print(since_id)
+        since_id = check_mentions(api, ["Hola", "Hello", "Queonda"], since_id)
+    logger.info("Replying to Tweet Mention...")
 
 def main():
     api = create_api()
