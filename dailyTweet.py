@@ -12,7 +12,6 @@ from textgenrnn import textgenrnn
 from config import create_api
 
 '''
-eeweffwf
 We could also add a functionality that can, based on a Tweet add more users to base our tweets upon
 or have an option to add in a "per tweet" basis, to the training model.
 
