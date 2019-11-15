@@ -2,3 +2,4 @@ tensorflow
 tweepy
 textgenrnn
 schedule
+pymongo
