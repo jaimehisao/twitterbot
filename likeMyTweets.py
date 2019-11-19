@@ -16,8 +16,8 @@ logger = logging.getLogger()
 
 #Method will fetch tweets and then iterate over them to like them, though this will quickly exahust
 #the API Request Limit for starter users
-def likeMyTweets(api, since_id):
-    logger.info("Retrieving Tweets and finding myself...")
+def likeMyTweets(api, since_id) -> None:
+    logger.info("Retrieving Tweets from myself...")
     for tweet in tweepy.Cursor(api.home_timeline, count = 20).items():
         if(tweet.user.screen_name == 'JHisao'):
                 try:
@@ -28,8 +28,8 @@ def likeMyTweets(api, since_id):
                         logger.info("You've already liked this tweet...")
 
 #Method that creates the API object to connect to Twitter and then proceeds to call the likeMyTweets Function
-def likeMTweets():
+def likeMTweets() -> None:
     api = create_api()
     since_id = 1
-    while True:
-        likeMyTweets(api, since_id)
+    #while True:
+    likeMyTweets(api, since_id)
