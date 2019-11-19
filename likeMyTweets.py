@@ -26,6 +26,7 @@ def likeMyTweets(api, since_id) -> None:
                         logger.info(toSend)
                 except tweepy.TweepError:
                         logger.info("You've already liked this tweet...")
+                        break
 
 #Method that creates the API object to connect to Twitter and then proceeds to call the likeMyTweets Function
 def likeMTweets() -> None:
