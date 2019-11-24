@@ -50,6 +50,7 @@ def processText(text):
 
 def generateTweet() -> None:
     print("Downloading user Tweets...")
+    tweetsAdded = 0
     #all_tweets = tweepy.Cursor(api.user_timeline, screen_name = 'JHisao', count = 200, tweet_mode = 'extended', include_rts = False).pages(16)
     mongo = mongoer.Mongo()
     userTweets = mongo.returnTwitterUserTweetsCollection()
@@ -61,6 +62,9 @@ def generateTweet() -> None:
                 if tweetText is not '':
                     texts.append(tweetText)
                     contextLabels.append('all')
+                    tweetsAdded+1
+        logger.log(tweetsAdded)
+
     del mongo
     
 
