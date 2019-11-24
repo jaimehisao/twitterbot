@@ -12,7 +12,7 @@ class Mongo:
         self.mongoClient = pymongo.MongoClient("mongodb://10.0.0.4:27017/")
 
     def __del__(self):
-        self.mydb.close()
+        self.mongoClient.close()
 
     #Returns Collection for listening stats
     def returnListentingStatsCollection(self) -> pymongo.collection.Collection:
@@ -27,7 +27,7 @@ class Mongo:
         return self.statsCol
 
     #Returns Collection for Twitter User Tweets
-    def returnTwitterUserCollection(self) -> pymongo.collection.Collection:
+    def returnTwitterUserTweetsCollection(self) -> pymongo.collection.Collection:
         self.mydb = self.mongoClient["twitter"]
         self.statsCol = self.mydb["tweets"]
         return self.statsCol

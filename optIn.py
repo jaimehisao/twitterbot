@@ -11,7 +11,13 @@ import mongoer
 
 #Look for @hisaobot1 tweets in the database and process information with those
 
-#Instantiate the Connection to MongoDB
-mongo = mongoer.Mongo()
+#Queries the database and checks the latest tweets from today, then checks if Opt status changed per user
+def checkOptIns() -> None:
+    #Instantiate the Connection to MongoDB and retrieve the collection to use
+    mongo = mongoer.Mongo()
+    optedIn = mongo.returnOptedInUsersCollection()
 
-del mongo
+    #Get today's tweets
+    optedIn.find_one({})
+
+    del mongo #Deletes Mongo Object to effectively close the connection
