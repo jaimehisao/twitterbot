@@ -1,16 +1,23 @@
 import mongoer
 from config import create_api
 
+def userChangedUsername() -> None:
+    #Based on the User ID, retrieve the username/screename
+    pass
+
+#Recieves the user/screename and returns the ID.
+def retrieveUserId() -> None:
+    pass
+
 
 def updateOptedInDb() -> None:
-    for user in optedInDatabase.find({}):
         pass
 
 def removeTweets() -> None:
     mongo = mongoer.Mongo()
     userTweets = mongo.returnTwitterUserTweetsCollection()
     for tweet in userTweets.find({}):
-        if(tweet['screenName'] == 'ferrus243'):
+        if(tweet['screenName'] == 'Galdifab'):
             print('Deleting Tweet w/ID ' + tweet['_id'])
             userTweets.delete_one({'_id' : tweet['_id']})
         else:
@@ -43,4 +50,4 @@ def additionalUserFieldsAdder():
         users.insert_one(user)
     del mongo
 
-additionalUserFieldsAdder()
+removeTweets()
