@@ -15,7 +15,7 @@ logger = logging.getLogger()
 def follow():
         api = create_api()
         #since_id = 1
-        for follower in tweepy.Cursor(api.followers, count = 30).items():
+        for follower in tweepy.Cursor(api.followers, count = 20).items():
                 follower.follow()
                 logger.info("User: {follower} has been followed!")
 
@@ -23,7 +23,7 @@ def follow():
 def unfollow():
     api = create_api()
     #since_id = 1
-    for follower in tweepy.Cursor(api.followers, count = 30).items():
+    for follower in tweepy.Cursor(api.followers, count = 20).items():
             if follower.destroy_friendship:
                     api.destroy_friendship(follower.id)
                     logger.info("User: {follower} has been unfollowed!")
