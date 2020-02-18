@@ -25,8 +25,7 @@ def retrieveTweets(screenName) -> None:
     try:
         item = api.get_user(screenName)
     except:
-        print('An error ocurred...User likely changed screenName or account is unavailable...')
-        print('This while quering tweets from: '+ screenName + '...')
+        print('An error ocurred while quering tweets from: '+ screenName + '...user likely changed screenName or account is unavailable...')
     else:
        #For every Tweet of the given screenName
         for status in Cursor(api.user_timeline, id=screenName).items():
@@ -203,7 +202,7 @@ def retrieveUsersTweets() -> None:
             
                 #Checks if the Tweet isn't already inserted in the DB using the UUID
                 if not userTweets.find_one({"_id" : status.id_str}):
-                    tmpTweet = {'_id' : status.id_str, 'userID' : item.id_str,'name' : nameOp, 'screenName' : screen, 'text' : statusText,
+                    tmpTweet = {'_id' : status.id_str, 'userId' : item.id_str,'name' : nameOp, 'screenName' : screen, 'text' : statusText,
                         'timestamp' : timestamp, 'userMentions' : userMentions, 'hashtags' : hashtags,
                         'replyUser' : replyUser, 'replyUserId' : replyUserId, 'replyStatusId' : replyStatusId,
                         'isRetweet' : isRetweet, 'linkedURL' : tweetLinkedUrl, 'statusesCount' : statuses}
@@ -219,5 +218,5 @@ def retrieveUsersTweets() -> None:
     print (numTweets)
     del mongo
 
-#retrieveUsersTweets()
+retrieveUsersTweets()
 #retrieveTweets('marin_chavarria')

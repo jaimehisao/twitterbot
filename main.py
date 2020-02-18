@@ -14,7 +14,7 @@ from mentions import handleMentions
 #from dailyTweet import dailyBasedTweet
 
 #Scheduling for tasks that the bot has tu run
-#schedule.every().day.at("22:30").do(follow) #Follows Back users that follow the bot
+schedule.every().day.at("22:30").do(follow) #Follows Back users that follow the bot
 #schedule.every().day.at("01:35").do(unfollow) #Unfollows users that follow the bot
 schedule.every().hour.at(":30").do(likeMTweets) #Likes my other (main) account's tweets
 #schedule.every().hour.at(":00").do(handleMentions) #Handles Tweet Mentions at each hour
