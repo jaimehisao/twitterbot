@@ -18,3 +18,8 @@ The Project uses libraries like Tweepy to serve as a Twitter API Wrapper and tex
 - Sync Follower & Tweet list locally to reduce the number of queries to Twitter's API
 - Make the robot work with Twitter's Stream API to get and interact with Tweets in real time
 - Connect the bot to other projects of mine
+
+
+
+Notes for me: 
+This ignores .json and .hd5 files, those are not uploaded to GitHub
