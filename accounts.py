@@ -84,14 +84,31 @@ def addNew(usr) -> None:
     mongo = mongoer.Mongo()
     uTemp = None
     optedInDatabase = mongo.returnOptedInUsersCollection()
+    
     #Checks if the user id exists in Twitter and throws exception if otherwise.
     try:
         uTemp = api.get_user(usr)
     except:
         print('User does not exist.')
     else:
-        print('Adding ' + uTemp.id_str + ' with screenName' + uTemp.screen_name)
+        print('Adding ' + uTemp.id_str + ' with screenName ' + uTemp.screen_name)
         #Checks if the user already exists in the DB based on the Twitter ID.
+        user = {}
+        user['_id'] = str(uTemp.id) 
+        user['screenName'] = uTemp.screen_name 
+        user['addedAt'] = datetime.utcnow()
+        user['followersCount'] = uTemp.followers_count
+        user['friendsCount'] = uTemp.friends_count
+        user['createdAt'] = uTemp.created_at
+        user['favouritesCount'] = uTemp.favourites_count
+        user['statusesCount'] = uTemp.statuses_count
+        try:
+            optedInDatabase.insert_one(user)
+        except:
+            pass
+        else:
+            print('User ' + uTemp.screen_name + ' added successfully')
+        '''
         try:
             user['_id'] = str(uTemp.id) 
             user['screenName'] = uTemp.screen_name 
@@ -104,9 +121,9 @@ def addNew(usr) -> None:
             optedInDatabase.insert_one(user)
         except:
             print('Error when trying to add User...Likely a duplicate!')
+        '''
     del mongo
 
-userChangedUsername()
 
 '''
 #Main, mostly for testing purposes.

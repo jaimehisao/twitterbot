@@ -17,7 +17,7 @@ def follow():
         #since_id = 1
         for follower in tweepy.Cursor(api.followers, count = 20).items():
                 follower.follow()
-                logger.info("User: {follower} has been followed!")
+                logger.info("User: " + follower.name +" has been followed!")
 
 
 def unfollow():

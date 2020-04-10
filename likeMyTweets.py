@@ -22,7 +22,7 @@ def likeMyTweets(api, since_id) -> None:
         if(tweet.user.screen_name == 'jaimehisao'):
                 try:
                         api.create_favorite(tweet.id)
-                        toSend = 'Tweet with ' + tweet.id + "liked!"
+                        toSend = 'Tweet with ' + tweet.id + "liked!" 
                         logger.info(toSend)
                 except tweepy.TweepError:
                         logger.info("You've already liked this tweet...")

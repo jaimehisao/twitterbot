@@ -27,9 +27,9 @@ def create_api():
     #Try and catch for credentials, if not possible returns a generic error and prints trace
     try:
         api.verify_credentials()
-    except Exception as e:
+    except Exception :
         logger.error("Error creating API", exc_info=True)
-        raise e
+        #raise e
         
     #Ends Execution and returns API value
     logger.info("API created")

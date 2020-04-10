@@ -1,6 +1,26 @@
 import mongoer
 from config import create_api
 
+def addUserIDToTweets():
+    mongo = mongoer.Mongo()
+    userTweets = mongo.returnTwitterUserTweetsCollection()
+    optedIn = mongo.returnOptedInUsersCollection()
+
+    #Finds and retrieves all users that have optedIn to have their tweets retrieved.
+    for user in optedIn.find({}):
+        print('Adding User ID to Tweets from ' + user['screenName'])
+        totalTweets = 0
+        #For all the users that opted in to have their tweets queried, recieve them.
+        for tweet in userTweets.find({'screenName' : user['screenName']}):
+            #Work on the tweets, by Adding the User ID field.
+            userTweets.delete_one({'_id' : tweet['_id']})
+            tweet['userId'] = user['_id']
+            userTweets.insert_one(tweet)
+            print('Tweet w/ID ' + tweet['_id'] + 'was added the UID ' + user['_id'])
+            totalTweets+=1
+        print(totalTweets)
+
+    
 
 #Temporary fix for duplicate fields - Not in use anymore UserID vs UserId
 def removeCapsUserID():
@@ -134,4 +154,4 @@ def additionalUserFieldsAdder():
 
 
 #Part where pieces of code are hard coded to run when the file runs
-removeCapsUserID()
+addUserIDToTweets()
