@@ -1,3 +1,4 @@
+tqdm
 pyfiglet
 PyInquirer
 tensorflow

@@ -46,20 +46,20 @@ def main():
         track_list = input('Keywords to track (comma seperated): ').strip()
         if follow_list:
             follow_list = [u for u in follow_list.split(',')]
-            userid_list = []
+            user_id_list = []
             username_list = []
 
             for user in follow_list:
                 if user.isdigit():
-                    userid_list.append(user)
+                    user_id_list.append(user)
                 else:
                     username_list.append(user)
 
             for username in username_list:
                 user = api.get_user(username)
-                userid_list.append(user.id)
+                user_id_list.append(user.id)
 
-            follow_list = userid_list
+            follow_list = user_id_list
         else:
             follow_list = None
         if track_list:

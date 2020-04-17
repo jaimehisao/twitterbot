@@ -14,7 +14,7 @@ import json
 # sys.path.append('/Users/hisao/Documents/Projects/TwitterBot')
 # Homemade Classes
 
-from src.accounts import addNew
+from src.accounts import add_new_user
 from src.retriever import retrieveUsersTweetsCLI
 
 # Pip Classes
@@ -52,9 +52,9 @@ def add_user_to_query():
     ans = prompt(requestUserInfo)
     # print(ans['userToAdd'])
     if ans['userToAdd'] == 'back':
-        mainMenu()
+        main_menu()
     else:
-        addNew(ans['userToAdd'])
+        add_new_user(ans['userToAdd'])
 
 
 def search_by_username():
@@ -63,7 +63,7 @@ def search_by_username():
 
 
 def settings_menu():
-    settingsM = None
+    settings_m = None
     # If the user is admin, the following options are enabled.
     if admin:
         settings_m = [
@@ -121,7 +121,7 @@ def settings_menu():
 
 # Menu that responds to the local
 def query_tweets_locally_menu():
-    localquery = [
+    local_query = [
         {
             'type': 'list',
             'name': 'QueryMenu',
@@ -135,7 +135,7 @@ def query_tweets_locally_menu():
         }
     ]
 
-    ans = prompt(localquery)
+    ans = prompt(local_query)
     if ans['QueryMenu'] == 'Query by Username':
         query_locally_by_username()
     else:
@@ -155,8 +155,8 @@ def query_locally_by_username():
             'message': 'Username of the user you want to query locally'
         }
     ]
-    screenName = prompt(options)
-    queryByScreenName(screenName['theUser'])
+    screen_name = prompt(options)
+    query_locally_by_screenname(screen_name['theUser'])
 
 
 def query_locally_by_screenname():

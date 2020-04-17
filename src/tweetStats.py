@@ -3,13 +3,13 @@ import logging
 import time
 
 
-def printStats():
+def print_stats():
     pass
 
 
-def getUserData():
+def get_user_data():
     pass
 
 
-def calculateStats():
+def calculate_stats():
     pass
