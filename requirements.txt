@@ -1,0 +1,7 @@
+pyfiglet
+PyInquirer
+tensorflow
+tweepy
+textgenrnn
+schedule
+pymongo
