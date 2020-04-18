@@ -1,9 +1,9 @@
-'''
+"""
 tweetAdmin.py -- Program that allows full CLI Access to the Tweet backend and administration.
 By: Jaime Hisao Yesaki A01720044
 Version: 0.1
 Created on: 7/02/2020
-'''
+"""
 
 # System Classes
 import time
@@ -15,7 +15,7 @@ import json
 # Homemade Classes
 
 from src.accounts import add_new_user
-from src.retriever import retrieveUsersTweetsCLI
+from src.retriever import retrieve_user_tweets_cli
 
 # Pip Classes
 from pyfiglet import Figlet
@@ -32,7 +32,7 @@ admin = False
 
 # Calls the retriever.py file and pulls new tweets.
 def query_from_twitter():
-    retrieveUsersTweetsCLI()
+    retrieve_user_tweets_cli()
 
 
 def system_status():
@@ -41,7 +41,7 @@ def system_status():
 
 def add_user_to_query():
     """Adds user by Twitter Handle."""
-    requestUserInfo = [
+    request_user_info = [
         {
             'type': 'input',
             'name': 'userToAdd',
@@ -49,7 +49,7 @@ def add_user_to_query():
         }
     ]
 
-    ans = prompt(requestUserInfo)
+    ans = prompt(request_user_info)
     # print(ans['userToAdd'])
     if ans['userToAdd'] == 'back':
         main_menu()
@@ -156,7 +156,7 @@ def query_locally_by_username():
         }
     ]
     screen_name = prompt(options)
-    query_locally_by_screenname(screen_name['theUser'])
+    # query_locally_by_screenname(screen_name['theUser'])
 
 
 def query_locally_by_screenname():

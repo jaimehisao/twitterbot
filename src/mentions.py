@@ -1,9 +1,9 @@
-'''
-mentions.py by Jaime Hisao Yesaki 
+"""
+mentions.py by Jaime Hisao Yesaki
 This program checks if the bot was mentioned in Twitter and interacts with the user depending on the query.
 Created August 1, 2019
 Version 1.1
-'''
+"""
 from src.config import create_api
 import tweepy
 import logging

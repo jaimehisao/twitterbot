@@ -17,9 +17,9 @@ import src.mongoer
 def check_opt_ins() -> None:
     # Instantiate the Connection to MongoDB and retrieve the collection to use
     mongo = src.mongoer.Mongo()
-    optedIn = mongo.returnOptedInUsersCollection()
+    opted_in = mongo.returnOptedInUsersCollection()
 
     # Get today's tweets
-    optedIn.find_one({})
+    opted_in.find_one({})
 
     del mongo  # Deletes Mongo Object to effectively close the connection
