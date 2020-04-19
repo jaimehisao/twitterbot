@@ -8,7 +8,7 @@ Version 1.3
 import schedule  # To run code at specific intervals
 import time  # To handle and calculate time
 
-from src.likeMyTweets import like_my_tweets
+from src.interactions.likeMyTweets import like_my_tweets
 
 # from dailyTweet import dailyBasedTweet
 

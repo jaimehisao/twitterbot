@@ -1,8 +1,6 @@
-from src.config import create_api
-import pymongo
-import tweepy
-import src.mongoer
-from datetime import datetime, date, time, timedelta
+from src.auth.config import create_api
+import src.databases.mongoer
+from datetime import datetime
 
 '''
 Methods contained in this file
@@ -34,7 +32,7 @@ def user_changed_username() -> None:
     # To run this, users have to have their Twitter ID, so we run that first.
     uuid_to_twitter_id()
     api = create_api()
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     opted_users = mongo.return_opted_in_user_collection()
     for user in opted_users.find({}):
         try:
@@ -52,20 +50,20 @@ def user_changed_username() -> None:
 
 
 # Checks if the user is in the database, returns a boolean and prints it out too.
-def checkIfInDatabase(screenName):
-    mongo = src.mongoer.Mongo()
+def check_if_in_database(screen_name) -> bool:
+    mongo = src.databases.mongoer.Mongo()
     opted_users = mongo.return_opted_in_user_collection()
-    if opted_users.find({'_id': screenName}):
-        print(screenName + ' is in the database!')
+    if opted_users.find({'_id': screen_name}):
+        print(screen_name + ' is in the database!')
         return True
     else:
-        print(screenName + ' is not in the database!')
+        print(screen_name + ' is not in the database!')
         return False
 
 
 # Prints out the users that are in the Opted-In Database.
 def print_users() -> None:
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     optedUsers = mongo.returnOptedInUsersCollection()
     for user in optedUsers.find({}):
         print(user['screenName'])
@@ -75,7 +73,7 @@ def print_users() -> None:
 # Returns a list with the usernames in the database.
 def list_users():
     users = []
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     opted_users = mongo.returnOptedInUsersCollection()
     for user in opted_users.find({}):
         users.append(user['screenName'])
@@ -86,7 +84,7 @@ def list_users():
 # Adds a new user, in a one by one basis.
 def add_new_user(usr) -> None:
     api = create_api()
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     user_temp = None
     opted_in_database = mongo.returnOptedInUsersCollection()
 

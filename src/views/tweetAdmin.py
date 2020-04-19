@@ -6,20 +6,16 @@ Created on: 7/02/2020
 """
 
 # System Classes
-import time
-import uuid
-import sys
-import json
 
 # sys.path.append('/Users/hisao/Documents/Projects/TwitterBot')
 # Homemade Classes
 
-from src.accounts import add_new_user
-from src.retriever import retrieve_user_tweets_cli
+from src.accounts.accounts import add_new_user
+from src.tweets.retriever import retrieve_user_tweets_cli
 
 # Pip Classes
 from pyfiglet import Figlet
-from PyInquirer import style_from_dict, Token, prompt, Separator, print_json
+from PyInquirer import prompt, Separator
 from pprint import pprint
 
 # Sentry Error Monitoring

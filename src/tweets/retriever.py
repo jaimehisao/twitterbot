@@ -1,17 +1,8 @@
-from tweepy import OAuthHandler
-from tweepy import API
 from tweepy import Cursor
-from datetime import datetime, date, time, timedelta
-from collections import Counter
-import sys
-import uuid
-import time
-
-import pprint
 
 # Homemade Classes import
-from src.config import create_api
-import src.mongoer
+from src.auth.config import create_api
+import src.databases.mongoer
 
 # Progress Bar
 from tqdm import tqdm
@@ -24,7 +15,7 @@ api = create_api()
 # Retrieves Tweets from an individual user, the username is sent as a parameter.
 def retrieve_user_tweets_cli() -> None:
     # Open Connection to MongoDB and sets the collections to be used
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     user_tweets = mongo.returnTwitterUserTweetsCollection()
     opted_in_database = mongo.returnOptedInUsersCollection()
     num_tweets = 0
@@ -136,7 +127,7 @@ def retrieve_user_tweets_cli() -> None:
 # Retrieves Tweets from an individual user, the username is sent as a parameter.
 def retrieve_tweets(screen_name) -> None:
     # Open Connection to MongoDB and sets the collections to be used
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     user_tweets = mongo.returnTwitterUserTweetsCollection()
     user_tweet_num = 0
     # Add Try and Catch for user not found tweepy.error.TweepError: [{'code': 50, 'message': 'User not found.'}]
@@ -232,7 +223,7 @@ def retrieve_tweets(screen_name) -> None:
 
 # Retrieve User's information to add to the database - Incomplete
 def retrieve_basic_info() -> None:
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     opted_in_database = mongo.returnOptedInUsersCollection()
     for user in opted_in_database.find({}):
         user_data = api.get_user(user['screenName'])
@@ -242,7 +233,7 @@ def retrieve_basic_info() -> None:
 # Retrieves the tweets from the Opted In Users and adds them to the database.
 def retrieve_user_tweets() -> None:
     # Open Connection to MongoDB and sets the collections to be used
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     user_tweets = mongo.returnTwitterUserTweetsCollection()
     opted_in_database = mongo.returnOptedInUsersCollection()
     num_tweets = 0

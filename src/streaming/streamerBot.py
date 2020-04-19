@@ -1,8 +1,6 @@
 import tweepy
-from src.config import create_api
+from src.auth.config import create_api
 from textwrap import TextWrapper
-from getpass import getpass
-import time
 
 
 class StreamWatcherListener(tweepy.StreamListener):

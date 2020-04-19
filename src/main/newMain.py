@@ -8,7 +8,6 @@ Version 1.0
 
 import schedule  # To run code at specific intervals
 import time  # To handle and calculate time
-from src.retriever import retrieve_user_tweets
 
 # from followBack import follow
 # from followBack import un_follows

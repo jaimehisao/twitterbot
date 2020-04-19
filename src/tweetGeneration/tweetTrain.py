@@ -4,15 +4,11 @@ This program uses saved tweets to generate tweets.
 Created January 9, 2020
 Version 0.1
 """
-import tweepy
 import logging
-import re  # Regex
 # from textgenrnn import textgenrnn
 from langdetect import detect
-from src.commonUtils import process_text
+
 # Bot Classes
-import src.mongoer
-from src.config import create_api
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()

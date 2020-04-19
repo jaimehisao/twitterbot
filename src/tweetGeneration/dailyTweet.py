@@ -4,14 +4,11 @@ This program uses my main Twitter account as well as other accounta as templates
 Created August 5, 2019
 Version 0.1
 """
-import tweepy
 import logging
-import re  # Regex
-from src.config import create_api
 from textgenrnn import textgenrnn
-from src.commonUtils import process_text
+from src.tweetGeneration.commonUtils import process_text
 
-import src.mongoer
+import src.databases.mongoer
 
 '''
 We could also add a functionality that can, based on a Tweet add more users to base our tweets upon
@@ -43,7 +40,7 @@ def generate_tweet():
     tweets_added = 0
     # all_tweets = tweepy.Cursor(api.user_timeline, screen_name = 'JHisao', count = 200, tweet_mode = 'extended',
     # include_rts = False).pages(16)
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     user_tweets = mongo.return_twitter_user_tweet_collection()
     for tweet in user_tweets.find({}):
         if tweet['screenName'] == 'marin_chavarria':  # TRY AND CATCH IF ARR IS EMPTY

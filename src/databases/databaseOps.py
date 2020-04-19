@@ -1,9 +1,9 @@
-from src.config import create_api
-import src.mongoer
+from src.auth.config import create_api
+import src.databases.mongoer
 
 
 def add_user_id_to_tweets():
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     user_tweets = mongo.returnTwitterUserTweetsCollection()
     opted_in = mongo.returnOptedInUsersCollection()
 
@@ -24,7 +24,7 @@ def add_user_id_to_tweets():
 
 # Temporary fix for duplicate fields - Not in use anymore UserID vs UserId
 def remove_caps_user_id():
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     user_tweets = mongo.returnTwitterUserTweetsCollection()
     user_tweets.update({}, {'$unset': {'userID': 1}}, multi=True)
     del mongo
@@ -33,7 +33,7 @@ def remove_caps_user_id():
 # Removes a Tweet by a specific given ID (of the tweet).
 def remove_tweets_by_id(id) -> None:
     # Connect the Database
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     user_tweets = mongo.returnTwitterUserTweetsCollection()
     # Retrieve the tweets that match the criteria (the ID)
     for tweet in user_tweets.find({'_id': id}):
@@ -45,7 +45,7 @@ def remove_tweets_by_id(id) -> None:
 # Removes Tweets whose author is the User ID given.
 def remove_tweets_by_user(user) -> None:
     # Connect the Database
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     user_tweets = mongo.returnTwitterUserTweetsCollection()
     # Using the screenName, retrieve the user ID
     user_id = retrieve_user_id(user)
@@ -103,7 +103,7 @@ Version 1.0
 
 
 def add_user_id_to_tweets() -> None:
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     user_tweets = mongo.returnTwitterUserTweetsCollection()
     users = mongo.returnOptedInUsersCollection()
     for tweet in user_tweets.find({}):
@@ -130,7 +130,7 @@ Version 1.0
 
 
 def remove_tweets() -> None:
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     user_tweets = mongo.returnTwitterUserTweetsCollection()
     for tweet in user_tweets.find({}):
         if tweet['screenName'] == 'Galdifab':
@@ -156,7 +156,7 @@ Version 1.0
 
 def additional_user_fields_adder():
     api = create_api()
-    mongo = src.mongoer.Mongo()
+    mongo = src.databases.mongoer.Mongo()
     users = mongo.returnOptedInUsersCollection()
     for user in users.find({}):
         uTemp = api.get_user(user['screenName'])
