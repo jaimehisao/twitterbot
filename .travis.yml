@@ -3,6 +3,8 @@ python:
   - 2.7
   - 3.5
   - 3.6
+services:
+	- mongodb
 before_install:
   - python --version
   - pip install -U pip
