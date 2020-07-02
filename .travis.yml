@@ -7,7 +7,7 @@ services:
   - neo4j
 before_install:
   - python --version
-  - pip install requirements.txt
+  - pip install -r requirements.txt
   - pip install -U pip
   - pip install -U pytest
   - pip install codecov
