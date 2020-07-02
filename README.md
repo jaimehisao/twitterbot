@@ -1,4 +1,5 @@
-# TwitterBot
+# TwitterBot 
+[![Build Status](https://travis-ci.com/jaimehisao/twitterbot.svg?token=2qd9crgEcgQM7NrnxAxd&branch=master)](https://travis-ci.com/jaimehisao/twitterbot)
 
 ## Project Objective
 Create a simple bot that runs at specific times during the day to do simple tasks, such as replies, likes, and follows to its 
