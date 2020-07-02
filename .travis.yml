@@ -19,7 +19,7 @@ script:
   - docker build -t tweetbot .
 after_success:
   - codecov # submit coverage
-  - docker login docker.pkg.github.com -u $USERNAME -password--stdin $TOKEN
+  - docker login docker.pkg.github.com -u $USERNAME --password-stdin $TOKEN
   - docker tag tweetbot docker.pkg.github.com/jaimehisao/twitterbot/tweetbot:$TRAVIS_BUILD_NUMBER
   - docker push docker.pkg.github.com/jaimehisao/twitterbot/tweetbot:$TRAVIS_BUILD_NUMBER
   - docker tag tweetbot docker.pkg.github.com/jaimehisao/twitterbot/tweetbot:latest
