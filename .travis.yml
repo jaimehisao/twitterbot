@@ -16,3 +16,10 @@ before_install:
 script: pytest # run tests
 after_success:
   - codecov # submit coverage
+
+deploy:
+  - provider: docker
+    email: jaimehisao2011@gmail.com
+    registry: docker.pkg.github.com
+    api_key:
+      secure: SOMEKEY

@@ -1,14 +1,11 @@
 neo4j
-matplotlib
-networkx
 langdetect
 tqdm
 pyfiglet
 PyInquirer
-tensorflow
 tweepy
-textgenrnn
 schedule
 pymongo
 python-dotenv
-psycopg2-binary
+psycopg2
+sentry_sdk
