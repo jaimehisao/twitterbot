@@ -5,6 +5,7 @@ services:
   - mongodb
   - postgresql
   - neo4j
+  - docker
 before_install:
   - python --version
   - pip install -r requirements.txt
@@ -13,13 +14,13 @@ before_install:
   - pip install codecov
   #install:
   # - pip install ".[test]" . # install package + test dependencies
-script: pytest # run tests
+script:
+  - pytest # run tests
+  - docker build -t tweetbot .
 after_success:
   - codecov # submit coverage
-
-deploy:
-  - provider: docker
-    email: jaimehisao2011@gmail.com
-    registry: docker.pkg.github.com
-    api_key:
-      secure: SOMEKEY
+  - docker login docker.pkg.github.com -u $USERNAME -p $TOKEN
+  - docker tag tweetbot docker.pkg.github.com/jaimehisao/tweetbot/tweetbot:$TRAVIS_BUILD_NUMBER
+  - docker push docker.pkg.github.com/jaimehisao/tweetbot/tweetbot:$TRAVIS_BUILD_NUMBER
+  - docker tag tweetbot docker.pkg.github.com/jaimehisao/tweetbot/tweetbot:latest
+  - docker push docker.pkg.github.com/jaimehisao/tweetbot/tweetbot:latest
