@@ -13,8 +13,7 @@ import psycopg2.extras
 import sentry_sdk
 
 # Homemade Classes import
-from src.auth.config import create_api
-import src.databases.mongoer
+from auth.config import create_api
 
 sentry_sdk.init("https://4f9f088dd80c46428a99e34b8ab95b20@sentry.io/3957265")
 
@@ -22,9 +21,6 @@ sentry_sdk.init("https://4f9f088dd80c46428a99e34b8ab95b20@sentry.io/3957265")
 # when the method is being used, besides surrounding it with a try ant catch statement.
 api = create_api()
 psycopg2.extras.register_uuid()
-
-mongo = src.databases.mongoer.Mongo()
-user_tweets = mongo.return_twitter_user_tweet_collection_originals()
 
 
 def add_user_if_non_existent(user, cursor, conn) -> None:
@@ -317,7 +313,7 @@ def retrieve_user_tweets():
     for user in cursor.fetchall():
         # print('💡INFO -> Fetching user ' + str(user[0]))
         usr_tweet_num = 0
-        if user[0] is not 1:
+        if user[0] != 1:
             uT = 0
             if user[1]:
                 try:
@@ -334,25 +330,8 @@ def retrieve_user_tweets():
                 except Exception as ex:
                     print('🚫ERROR -> User account does not exist or is private. (when querying) ' + str(ex))
         # Add Try and Catch for user not found tweepy.error.TweepError: [{'code': 50, 'message': 'User not found.'}]
-
-        '''
-        try:
-            if user[0] is not 1:
-                # item = api.get_user(user[0])
-                for status in Cursor(api.user_timeline, id=user[0]).items():
-                    if user[0] is not 1:
-                        stat = True
-                        print('INFO -> CHANGING tweet that is being queried')
-                        while stat:
-                            stat = tweet_add(status, cursor, connection)
-                        break
-        except Exception as e:
-            print(e)
-            print('ERROR -> An error ocurred...User likely changed screenName or account is unavailable... ' +
-                  'This while quering tweets from: ' + str(user[0]) + '...')
-                  '''
+    print('Finished querying the tweets')
     cursor.close()
     connection.close()
 
-
-retrieve_user_tweets()
+# retrieve_user_tweets()
