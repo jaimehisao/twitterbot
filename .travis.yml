@@ -2,7 +2,7 @@ language: python
 python:
   - 3.6
 services:
-	- mongodb
+  - mongodb
 before_install:
   - python --version
   - pip install requirements.txt
