@@ -1,3 +1,6 @@
+neo4j
+matplotlib
+networkx
 langdetect
 tqdm
 pyfiglet
@@ -7,3 +10,4 @@ tweepy
 textgenrnn
 schedule
 pymongo
+python-dotenv

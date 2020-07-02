@@ -5,7 +5,7 @@ Created September 3, 2019
 Version 0.1
 '''
 import sys
-from config import create_api
+from ..auth.config import create_api
 from tweepy import Stream
 from tweepy import API
 from tweepy.streaming import StreamListener
@@ -34,7 +34,7 @@ try:
     print('Start streaming.')
     stream.sample(languages=['en'])
 except KeyboardInterrupt:
-    print("Stopped.")
+    print("Stopped by user.")
 finally:
     print('Done.')
     stream.disconnect()

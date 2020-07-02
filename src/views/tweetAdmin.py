@@ -197,7 +197,7 @@ def main_menu():
                     'disabled': 'Unavailable at this time'
                 }
             ]
-        },
+        }
     ]
 
     # Prompt options and then handle the response.

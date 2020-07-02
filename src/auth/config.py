@@ -8,6 +8,9 @@ Version 1.0
 import tweepy
 import logging
 import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Loads values from the .env file
 
 logger = logging.getLogger()
 

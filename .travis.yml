@@ -7,6 +7,7 @@ services:
 	- mongodb
 before_install:
   - python --version
+  - pip install requirements.txt
   - pip install -U pip
   - pip install -U pytest
   - pip install codecov

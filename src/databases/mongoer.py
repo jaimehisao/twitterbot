@@ -10,7 +10,7 @@ import pymongo
 
 class Mongo:
     def __init__(self):
-        self.mongoClient = pymongo.MongoClient("mongodb://10.0.0.4:27017/")
+        self.mongoClient = pymongo.MongoClient("mongodb://services.hisao.org:27017/")
         self.my_db = None
         self.stats_column = None
 
@@ -33,6 +33,13 @@ class Mongo:
     def return_twitter_user_tweet_collection(self) -> pymongo.collection.Collection:
         self.my_db = self.mongoClient["twitter"]
         self.stats_column = self.my_db["tweets"]
+        return self.stats_column
+
+        # Returns Collection for Twitter User Tweets ORIGINALS
+
+    def return_twitter_user_tweet_collection_originals(self) -> pymongo.collection.Collection:
+        self.my_db = self.mongoClient["twitter"]
+        self.stats_column = self.my_db["originaltweets"]
         return self.stats_column
 
     # Returns Collection for Twitter OptIn Users

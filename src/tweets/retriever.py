@@ -16,8 +16,8 @@ api = create_api()
 def retrieve_user_tweets_cli() -> None:
     # Open Connection to MongoDB and sets the collections to be used
     mongo = src.databases.mongoer.Mongo()
-    user_tweets = mongo.returnTwitterUserTweetsCollection()
-    opted_in_database = mongo.returnOptedInUsersCollection()
+    user_tweets = mongo.return_twitter_user_tweet_collection()
+    opted_in_database = mongo.return_opted_in_user_collection()
     num_tweets = 0
     users_with_errors = []
     # optedInDatabase.insert_one({'_id' : str(uuid.uuid3(name = 'GabsmasterH', namespace = uuid.NAMESPACE_DNS)),
@@ -128,7 +128,7 @@ def retrieve_user_tweets_cli() -> None:
 def retrieve_tweets(screen_name) -> None:
     # Open Connection to MongoDB and sets the collections to be used
     mongo = src.databases.mongoer.Mongo()
-    user_tweets = mongo.returnTwitterUserTweetsCollection()
+    user_tweets = mongo.return_twitter_user_tweet_collection()
     user_tweet_num = 0
     # Add Try and Catch for user not found tweepy.error.TweepError: [{'code': 50, 'message': 'User not found.'}]
     try:
@@ -234,8 +234,8 @@ def retrieve_basic_info() -> None:
 def retrieve_user_tweets() -> None:
     # Open Connection to MongoDB and sets the collections to be used
     mongo = src.databases.mongoer.Mongo()
-    user_tweets = mongo.returnTwitterUserTweetsCollection()
-    opted_in_database = mongo.returnOptedInUsersCollection()
+    user_tweets = mongo.return_twitter_user_tweet_collection()
+    opted_in_database = mongo.return_opted_in_user_collection()
     num_tweets = 0
     # optedInDatabase.insert_one({'_id' : str(uuid.uuid3(name = 'GabsmasterH', namespace = uuid.NAMESPACE_DNS)),
     # 'screenName' : 'GabsmasterH', 'addedAt' : datetime.utcnow()}) Retrieves all opted in users in the MongoDB
@@ -333,4 +333,3 @@ def retrieve_user_tweets() -> None:
     print(num_tweets)
     del mongo
 
-# retrieveTweets('marin_chavarria')

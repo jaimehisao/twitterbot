@@ -1,3 +1,9 @@
+"""
+accounts.py
+Copyright Jaime Hisao, April 2020
+
+This code should not be used for malicious purpose and the creator is not held responsible in any case.
+"""
 from src.auth.config import create_api
 import src.databases.mongoer
 from datetime import datetime
@@ -9,12 +15,13 @@ B) printUsers() - Prints out the users that are in the Opted-In Database.
 C) listUsers() - Returns a list with the usernames in the database.
 D) addNew(usr) - Adds a new user, in a one by one basis, recieves the user as a parameter.
 E) userChangedUsername() - check if the users in the DB have changed their screenName 
-F) uuidToTwitterId() - checks if the users in the database have a UUID or a Twitter ID, and changes all accounts that don't to a Twitter Type ID.
+F) uuidToTwitterId() - checks if the users in the database have a UUID or a Twitter ID, and changes all accounts that 
+don't to a Twitter Type ID.
 '''
 
 
-# Defunct method that changes the UUID to a Twitter type ID. Used in the past but not at often.
 def uuid_to_twitter_id():
+    # Defunct method that changes the UUID to a Twitter type ID. Used in the past but not at often.
     api = create_api()
     mongo = str.mongoer.Mongo()
     users = mongo.returnOptedInUsersCollection()
@@ -27,10 +34,9 @@ def uuid_to_twitter_id():
     print('User records are up to date!')
 
 
-# This code runs to see if a user changed its username (@user) in Twitter, and update the DB accordingly.
 def user_changed_username() -> None:
-    # To run this, users have to have their Twitter ID, so we run that first.
-    uuid_to_twitter_id()
+    """This code runs to see if a user changed its username (@user) in Twitter, and update the DB accordingly."""
+    uuid_to_twitter_id()  # To run this, users have to have their Twitter ID, so we run that first.
     api = create_api()
     mongo = src.databases.mongoer.Mongo()
     opted_users = mongo.return_opted_in_user_collection()
@@ -86,7 +92,7 @@ def add_new_user(usr) -> None:
     api = create_api()
     mongo = src.databases.mongoer.Mongo()
     user_temp = None
-    opted_in_database = mongo.returnOptedInUsersCollection()
+    opted_in_database = mongo.return_opted_in_user_collection()
 
     # Checks if the user id exists in Twitter and throws exception if otherwise.
     try:
