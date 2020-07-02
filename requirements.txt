@@ -11,3 +11,4 @@ textgenrnn
 schedule
 pymongo
 python-dotenv
+psycopg2-binary
