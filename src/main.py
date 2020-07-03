@@ -26,7 +26,7 @@ from tweets.retrieverPostgres import retrieve_user_tweets
 # schedule.every().hour.at(":45").do(handle_mentions) #Handles Tweet Mentions at each 45 minute of hour
 # schedule.every().day.at("09:00").do(daily_based_tweets) #Handles Every Day Tweet
 
-schedule.every().hour.at(":26").do(retrieve_user_tweets)  # Download new tweets
+schedule.every().hour.at(":32").do(retrieve_user_tweets)  # Download new tweets
 
 # This will run always, checking the scheduler to see if a piece of code has to run at the specified hour and minute,
 # otherwise, go to sleep
