@@ -313,8 +313,10 @@ def retrieve_user_tweets():
     for user in cursor.fetchall():
         # print('💡INFO -> Fetching user ' + str(user[0]))
         usr_tweet_num = 0
+        num_users = 0
         if user[0] != 1:
             uT = 0
+            num_users += 1
             if user[1]:
                 try:
                     # input('do you want to continue')
@@ -330,7 +332,7 @@ def retrieve_user_tweets():
                 except Exception as ex:
                     print('🚫ERROR -> User account does not exist or is private. (when querying) ' + str(ex))
         # Add Try and Catch for user not found tweepy.error.TweepError: [{'code': 50, 'message': 'User not found.'}]
-    print('Finished querying the tweets')
+    print('Finished querying tweets from ' + str(num_users) + ' users.')
     cursor.close()
     connection.close()
 
