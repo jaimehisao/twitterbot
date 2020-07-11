@@ -18,10 +18,10 @@ logger = logging.getLogger()
 def like_my_tweets_local(api, since_id) -> None:
     logger.info("Retrieving Tweets from myself...")
     for tweet in tweepy.Cursor(api.home_timeline, count=20).items():
-        if (tweet.user.screen_name == 'jaimehisao'):
+        if tweet.user.screen_name == 'jaimehisao':
             try:
                 api.create_favorite(tweet.id)
-                toSend = 'Tweet with ' + tweet.id + "liked!"
+                toSend = 'Tweet with ' + str(tweet.id) + "liked!"
                 logger.info(toSend)
             except tweepy.TweepError:
                 logger.info("You've already liked this tweet...")
