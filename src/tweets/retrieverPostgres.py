@@ -10,12 +10,10 @@ from tweepy import error as tweepy_error
 from tqdm import tqdm  # Progress Bar
 import psycopg2
 import psycopg2.extras
-import sentry_sdk
 
 # Homemade Classes import
 from auth.config import create_api
 
-sentry_sdk.init("https://4f9f088dd80c46428a99e34b8ab95b20@sentry.io/3957265")
 
 # API Object from our keys. -> This creates a connection when the app is launched but we should change this to only
 # when the method is being used, besides surrounding it with a try ant catch statement.

@@ -10,7 +10,11 @@ import time  # To handle and calculate time
 
 import sys
 
+import sentry_sdk
+
 sys.path.append('/usr/code/src')
+
+sentry_sdk.init("https://75642e664d814773b15d11fa487da198@o285082.ingest.sentry.io/5307624")
 
 from interactions.likeMyTweets import like_my_tweets
 
