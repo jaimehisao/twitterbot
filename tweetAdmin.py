@@ -10,8 +10,8 @@ Created on: 7/02/2020
 # sys.path.append('/Users/hisao/Documents/Projects/TwitterBot')
 # Homemade Classes
 
-from src.accounts import add_new_user
-from src.retriever import retrieve_user_tweets_cli
+from accounts import add_new_user
+from retriever import retrieve_user_tweets_cli
 
 # Pip Classes
 from pyfiglet import Figlet

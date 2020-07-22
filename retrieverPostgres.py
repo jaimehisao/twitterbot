@@ -12,12 +12,13 @@ import psycopg2
 import psycopg2.extras
 
 # Homemade Classes import
-from auth.config import create_api
+#from config import create_api
+import config
 
 
 # API Object from our keys. -> This creates a connection when the app is launched but we should change this to only
 # when the method is being used, besides surrounding it with a try ant catch statement.
-api = create_api()
+api = config.create_api()
 psycopg2.extras.register_uuid()
 
 

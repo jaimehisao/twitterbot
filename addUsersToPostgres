@@ -3,7 +3,7 @@ import psycopg2
 
 import tweepy
 
-from src.config import create_api
+from config import create_api
 
 old = pymongo.MongoClient("mongodb://services.hisao.org:27017/")
 

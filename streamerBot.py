@@ -1,5 +1,5 @@
 import tweepy
-from src.config import create_api
+from config import create_api
 from textwrap import TextWrapper
 
 

@@ -5,7 +5,7 @@ Created September 3, 2019
 Version 0.1
 '''
 import sys
-from src.config import create_api
+from config import create_api
 from tweepy import Stream
 from tweepy.streaming import StreamListener
 

@@ -1,8 +1,8 @@
-import src.mongoer
+import mongoer
 
 
 def query_by_screenname(screen_name):
-    mongo = src.mongoer.Mongo()
+    mongo = mongoer.Mongo()
     database = mongo.return_twitter_user_tweet_collection()
 
     tweets = database.find({'screenName': screen_name})
