@@ -4,10 +4,9 @@ This program follows and un_follows automatically the users of the bot.
 Created August 1, 2019
 Version 1.1
 """
-from src.auth.config import create_api
+from src.config import create_api
 import tweepy
 import logging
-import time
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()

@@ -4,8 +4,8 @@ Copyright Jaime Hisao, April 2020
 
 This code should not be used for malicious purpose and the creator is not held responsible in any case.
 """
-from src.auth.config import create_api
-import src.databases.mongoer
+from src.config import create_api
+import src.mongoer
 from datetime import datetime
 
 '''
@@ -38,7 +38,7 @@ def user_changed_username() -> None:
     """This code runs to see if a user changed its username (@user) in Twitter, and update the DB accordingly."""
     uuid_to_twitter_id()  # To run this, users have to have their Twitter ID, so we run that first.
     api = create_api()
-    mongo = src.databases.mongoer.Mongo()
+    mongo = src.mongoer.Mongo()
     opted_users = mongo.return_opted_in_user_collection()
     for user in opted_users.find({}):
         try:
@@ -57,7 +57,7 @@ def user_changed_username() -> None:
 
 # Checks if the user is in the database, returns a boolean and prints it out too.
 def check_if_in_database(screen_name) -> bool:
-    mongo = src.databases.mongoer.Mongo()
+    mongo = src.mongoer.Mongo()
     opted_users = mongo.return_opted_in_user_collection()
     if opted_users.find({'_id': screen_name}):
         print(screen_name + ' is in the database!')
@@ -69,7 +69,7 @@ def check_if_in_database(screen_name) -> bool:
 
 # Prints out the users that are in the Opted-In Database.
 def print_users() -> None:
-    mongo = src.databases.mongoer.Mongo()
+    mongo = src.mongoer.Mongo()
     optedUsers = mongo.returnOptedInUsersCollection()
     for user in optedUsers.find({}):
         print(user['screenName'])
@@ -79,7 +79,7 @@ def print_users() -> None:
 # Returns a list with the usernames in the database.
 def list_users():
     users = []
-    mongo = src.databases.mongoer.Mongo()
+    mongo = src.mongoer.Mongo()
     opted_users = mongo.returnOptedInUsersCollection()
     for user in opted_users.find({}):
         users.append(user['screenName'])
@@ -90,7 +90,7 @@ def list_users():
 # Adds a new user, in a one by one basis.
 def add_new_user(usr) -> None:
     api = create_api()
-    mongo = src.databases.mongoer.Mongo()
+    mongo = src.mongoer.Mongo()
     user_temp = None
     opted_in_database = mongo.return_opted_in_user_collection()
 

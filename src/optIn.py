@@ -6,7 +6,7 @@ Created November 15, 2019
 Version 0.1
 """
 
-import src.databases.mongoer
+import src.mongoer
 
 
 # Look for @hisaobot1 tweets in the database and process information with those
@@ -14,7 +14,7 @@ import src.databases.mongoer
 # Queries the database and checks the latest tweets from today, then checks if Opt status changed per user
 def check_opt_ins() -> None:
     # Instantiate the Connection to MongoDB and retrieve the collection to use
-    mongo = src.databases.mongoer.Mongo()
+    mongo = src.mongoer.Mongo()
     opted_in = mongo.returnOptedInUsersCollection()
 
     # Get today's tweets

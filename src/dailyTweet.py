@@ -6,9 +6,9 @@ Version 0.1
 """
 import logging
 from textgenrnn import textgenrnn
-from src.tweetGeneration.commonUtils import process_text
+from src.commonUtils import process_text
 
-import src.databases.mongoer
+import src.mongoer
 
 '''
 We could also add a functionality that can, based on a Tweet add more users to base our tweets upon
@@ -40,7 +40,7 @@ def generate_tweet():
     tweets_added = 0
     # all_tweets = tweepy.Cursor(api.user_timeline, screen_name = 'JHisao', count = 200, tweet_mode = 'extended',
     # include_rts = False).pages(16)
-    mongo = src.databases.mongoer.Mongo()
+    mongo = src.mongoer.Mongo()
     user_tweets = mongo.return_twitter_user_tweet_collection()
     for tweet in user_tweets.find({}):
         if tweet['screenName'] == 'marin_chavarria':  # TRY AND CATCH IF ARR IS EMPTY

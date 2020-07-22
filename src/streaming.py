@@ -5,9 +5,8 @@ Created September 3, 2019
 Version 0.1
 '''
 import sys
-from ..auth.config import create_api
+from src.config import create_api
 from tweepy import Stream
-from tweepy import API
 from tweepy.streaming import StreamListener
 
 

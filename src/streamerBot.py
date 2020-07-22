@@ -1,5 +1,5 @@
 import tweepy
-from src.auth.config import create_api
+from src.config import create_api
 from textwrap import TextWrapper
 
 

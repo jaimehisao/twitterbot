@@ -1,11 +1,9 @@
-import pprint
-
 import pymongo
 import psycopg2
 
 import tweepy
 
-from src.auth.config import create_api
+from src.config import create_api
 
 old = pymongo.MongoClient("mongodb://services.hisao.org:27017/")
 
