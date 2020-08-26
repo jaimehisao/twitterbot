@@ -8,21 +8,22 @@ Version 1.0
 import tweepy
 import logging
 import os
-from dotenv import load_dotenv
+import dotenv
+import psycopg2
 
-load_dotenv()  # Loads values from the .env file
+dotenv.load_dotenv()  # Loads values from the .env file
 
 logger = logging.getLogger()
 
 
 def create_api():
-    # Gets variables from the enviroment (enviroment variables)
+    # Get env variables
     consumer_key = os.getenv("CONSUMER_KEY")
     consumer_secret = os.getenv("CONSUMER_SECRET")
     access_token = os.getenv("ACCESS_TOKEN")
     access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
 
-    # Handles authentication
+    # Handle authentication
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth, wait_on_rate_limit=True,
@@ -38,3 +39,13 @@ def create_api():
     # Ends Execution and returns API value
     logger.info("API created")
     return api
+
+
+def connect_to_db():
+    connection = psycopg2.connect(user="twitteruser",
+                                  password="twitterT343432434@",
+                                  host="services.hisao.org",
+                                  port="5432",
+                                  database="twitter")
+    return connection
+
