@@ -292,24 +292,13 @@ def retrieve_user_tweets():
     """
     Retrieves the tweets of all users in the user table from PostgreSQL database that have the pull_all flag as true
     """
-    # Open Connection to MongoDB and sets the collections to be used
-
-    connection = psycopg2.connect(user="twitteruser",
-                                  password="twitterT343432434@",
-                                  host="services.hisao.org",
-                                  port="5432",
-                                  database="twitter")
-
+    # Open Connection to PostgreSQL
+    connection = config.connect_to_db()
     cursor = connection.cursor()
 
     cursor.execute('SELECT user_id, pull_all, name FROM users')
-    # cursor.execute('SELECT user_id, pull_all, name, COUNT(*) FROM tweet, users WHERE "user" = user_id GROUP BY user_id ORDER BY COUNT(*) DESC')
-    # pprint.pprint(opted_in)
-    num_tweets = 0
     for user in cursor.fetchall():
         pBar = tqdm.tqdm(total=len(cursor.fetchall()) - 1)
-        # print('💡INFO -> Fetching user ' + str(user[0]))
-        usr_tweet_num = 0
         num_users = 0
         if user[0] != 1:
             uT = 0
@@ -324,15 +313,12 @@ def retrieve_user_tweets():
                         uT += 1
                         if not stat:
                             print('💡INFO -> CHANGING user that is being queried')
-                            # input('Finished querying ' + user[2] + ' Press enter to continue with the next...')
                             break
                     print('Tweets queried for ' + str(user[2]) + ' ' + str(uT))
                 except Exception as ex:
                     print('🚫ERROR -> User account does not exist or is private. (when querying) ' + str(ex))
         pBar.update(1)
-        # Add Try and Catch for user not found tweepy.error.TweepError: [{'code': 50, 'message': 'User not found.'}]
     print('Finished querying tweets from ' + str(num_users) + ' users.')
     pBar.close()
     cursor.close()
     connection.close()
-retrieve_user_tweets()

@@ -16,9 +16,13 @@ sys.path.append('/usr/code/src')
 
 sentry_sdk.init("https://75642e664d814773b15d11fa487da198@o285082.ingest.sentry.io/5307624")
 
-from interactions.likeMyTweets import like_my_tweets
+from likeMyTweets import like_my_tweets
 
-from tweets.retrieverPostgres import retrieve_user_tweets
+from retriever import retrieve_user_tweets
+
+from link_keywords_to_tweets import get_keywords_for_all_tweets
+
+
 
 # from dailyTweet import dailyBasedTweet
 
@@ -26,6 +30,7 @@ from tweets.retrieverPostgres import retrieve_user_tweets
 # schedule.every().day.at("22:30").do(follow) #Follows Back users that follow the bot
 # schedule.every().day.at("01:35").do(un_follow) #Unfollows users that follow the bot
 schedule.every(180).minutes.do(like_my_tweets)
+schedule.every(3000).minutes.do(get_keywords_for_all_tweets)
 # schedule.every().hour.at(":00").do(handle_mentions) #Handles Tweet Mentions at each hour
 # schedule.every().hour.at(":45").do(handle_mentions) #Handles Tweet Mentions at each 45 minute of hour
 # schedule.every().day.at("09:00").do(daily_based_tweets) #Handles Every Day Tweet
