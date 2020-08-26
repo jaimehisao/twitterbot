@@ -5,7 +5,7 @@ Created August 1, 2019
 Version 1.1
 """
 
-from auth.config import create_api
+from config import create_api
 import tweepy
 import logging
 
