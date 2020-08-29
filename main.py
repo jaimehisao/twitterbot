@@ -30,7 +30,6 @@ from link_keywords_to_tweets import get_keywords_for_all_tweets
 # schedule.every().day.at("22:30").do(follow) #Follows Back users that follow the bot
 # schedule.every().day.at("01:35").do(un_follow) #Unfollows users that follow the bot
 schedule.every(180).minutes.do(like_my_tweets)
-schedule.every().hour.at("01:35").do(get_keywords_for_all_tweets)
 # schedule.every().hour.at(":00").do(handle_mentions) #Handles Tweet Mentions at each hour
 # schedule.every().hour.at(":45").do(handle_mentions) #Handles Tweet Mentions at each 45 minute of hour
 # schedule.every().day.at("09:00").do(daily_based_tweets) #Handles Every Day Tweet
