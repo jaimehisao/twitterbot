@@ -3,10 +3,13 @@ type: docker
 name: default
 
 steps:
-- name: backend
+- name: test
   image: python
   commands:
   - pip install -r requirements.txt
   - pip install pytest
   - pytest
-  - docker build .
+- name: docker build
+  image: plugins/docker
+  commands:
+    - docker build .
