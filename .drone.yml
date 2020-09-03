@@ -9,7 +9,3 @@ steps:
   - pip install -r requirements.txt
   - pip install pytest
   - pytest
-- name: docker build
-  image: plugins/docker
-  commands:
-    - docker build .

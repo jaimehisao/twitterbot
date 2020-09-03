@@ -8,4 +8,4 @@ def recur_fibo(n):
 
 
 def test_fibo_num():
-    assert 9227465 == recur_fibo(35)
+    assert 1134903170 == recur_fibo(45)
