@@ -7,7 +7,7 @@ import uuid
 from tweepy import Cursor
 import psycopg2
 import psycopg2.extras
-import tqdm
+# import tqdm
 
 # Homemade Classes import
 import config
@@ -298,7 +298,7 @@ def retrieve_user_tweets():
 
     cursor.execute('SELECT user_id, pull_all, name FROM users')
     for user in cursor.fetchall():
-        pBar = tqdm.tqdm(total=len(cursor.fetchall()) - 1)
+        # pBar = tqdm.tqdm(total=len(cursor.fetchall()) - 1)
         num_users = 0
         if user[0] != 1:
             uT = 0
@@ -317,8 +317,8 @@ def retrieve_user_tweets():
                     print('Tweets queried for ' + str(user[2]) + ' ' + str(uT))
                 except Exception as ex:
                     print('🚫ERROR -> User account does not exist or is private. (when querying) ' + str(ex))
-        pBar.update(1)
+        # pBar.update(1)
     print('Finished querying tweets from ' + str(num_users) + ' users.')
-    pBar.close()
+    # pBar.close()
     cursor.close()
     connection.close()
