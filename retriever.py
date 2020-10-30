@@ -306,7 +306,7 @@ def retrieve_user_tweets():
             if user[1]:
                 try:
                     # input('do you want to continue')
-                    pBar.set_description("Processing tweets from " + user[2])
+                    # pBar.set_description("Processing tweets from " + user[2])
                     print('💡INFO -> Fetching user ' + user[2])
                     for status in Cursor(api.user_timeline, id=user[0]).items():
                         stat = tweet_add(status, cursor, connection)
