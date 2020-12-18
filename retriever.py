@@ -79,12 +79,12 @@ def tweet_add(status, cursor, conn) -> bool:
     if reply_to_user is not None:
         cursor.execute('SELECT user_id FROM users WHERE user_id = %s', (str(reply_to_user),))
         if len(cursor.fetchall()) == 0:
-            print('⚠️INFO -> User is not in DB, fetching info from Twitter...' + str(reply_to_user, ))
+            print('INFO -> User is not in DB, fetching info from Twitter...' + str(reply_to_user, ))
             try:
                 user_fetch = api.get_user(str(reply_to_user, ))
                 add_user_if_non_existent(user_fetch, cursor, conn)
             except Exception:
-                print('🚫ERROR -> User was not found on Twitter...using same ID but default values...')
+                print('ERROR -> User was not found on Twitter...using same ID but default values...')
                 cursor.execute('INSERT INTO users(user_id, "name", created_at) VALUES (%s,%s,%s)', (reply_to_user,
                                                                                                     "User not found",
                                                                                                     '2020-01-01'))
@@ -93,12 +93,12 @@ def tweet_add(status, cursor, conn) -> bool:
     # Make sure user exists in the DB
     cursor.execute('SELECT user_id FROM users WHERE user_id = %s', (str(user),))
     if len(cursor.fetchall()) == 0:
-        print('⚠️INFO -> User is not in DB, fetching info from Twitter...' + str(user, ))
+        print('INFO -> User is not in DB, fetching info from Twitter...' + str(user, ))
         try:
             user_fetch = api.get_user(str(user, ))
             add_user_if_non_existent(user_fetch, cursor, conn)
         except Exception:
-            print('🚫ERROR -> User was not found on Twitter...using same ID but default values...')
+            print('ERROR -> User was not found on Twitter...using same ID but default values...')
             cursor.execute('INSERT INTO users(user_id, "name", created_at) VALUES (%s,%s,%s)', (user,
                                                                                                 "User not found",
                                                                                                 '2020-01-01'))
@@ -113,13 +113,13 @@ def tweet_add(status, cursor, conn) -> bool:
         try:
             quote_tweet_id = status.quoted_status_id_str
         except AttributeError:
-            print("🚫Error -> Attribute Tweet ID is not on Status Object")
+            print("Error -> Attribute Tweet ID is not on Status Object")
             quote_tweet_id = random.randint(1, 100000)
 
         try:
             quote_user_id = status.in_reply_to_user_id_str
         except AttributeError:
-            print("🚫Error -> Attribute User ID is not on Status Object")
+            print("Error -> Attribute User ID is not on Status Object")
             quote_user_id = 1
 
     # Handle hashtags & mentions
@@ -148,19 +148,19 @@ def tweet_add(status, cursor, conn) -> bool:
                         tweet_url = url['url']
 
     if hasattr(status, "retweeted_status"):
-        print('💡INFO -> Is Retweet')
+        print('INFO -> Is Retweet')
         retweeted_status_attr = status.retweeted_status
         retweeted_tweet_id = retweeted_status_attr.id
         is_retweet = True
 
         cursor.execute('SELECT * FROM tweet WHERE tweet_id = %s', (retweeted_status_attr.id,))
         if len(cursor.fetchall()) == 0:
-            print('💡INFO -> Inserting RT that was not inserted.')
+            print('INFO -> Inserting RT that was not inserted.')
             try:
                 to_send = api.get_status(retweeted_tweet_id)
                 tweet_add(to_send, cursor, conn)
             except Exception as ex:
-                print('🚫ERROR -> Tweet not found, probably deleted...adding placeholder... ' + str(ex))
+                print('ERROR -> Tweet not found, probably deleted...adding placeholder... ' + str(ex))
                 cursor.execute('INSERT INTO tweet(tweet_id, text, "user", is_retweet) VALUES (%s,%s,%s, %s)',
                                (retweeted_tweet_id, "Tweet deleted...", 1, False))
                 conn.commit()
@@ -170,7 +170,7 @@ def tweet_add(status, cursor, conn) -> bool:
     if len(cursor.fetchall()) == 0:
         # if tweet is a retweeeted tweet
         if int(status.retweeted):
-            print('💡INFO -> RT')
+            print('INFO -> RT')
             # if retweeted tweet is not on the DB
             cursor.execute('SELECT tweet_id FROM tweet WHERE tweet_id = %s', retweeted_tweet_id)
             if len(cursor.fetchall()) == 0:  # Tweet is not on the DB, add it
@@ -178,17 +178,17 @@ def tweet_add(status, cursor, conn) -> bool:
                 for send in to_send:
                     tweet_add(send, cursor, conn)
         if is_quote:
-            print('💡INFO -> Quoted Tweet')
+            print('INFO -> Quoted Tweet')
             cursor.execute('SELECT * FROM tweet WHERE tweet_id = %s', (quote_tweet_id,))
             if len(cursor.fetchall()) == 0:  # if the quoted tweet is not on the database, add it
-                print('💡INFO -> Quoted tweet is non on the DB...adding ' + str(quote_tweet_id))
+                print('INFO -> Quoted tweet is non on the DB...adding ' + str(quote_tweet_id))
                 try:
                     if quote_tweet_id is not None:
                         to_send = api.get_status(quote_tweet_id)
                         tweet_add(to_send, cursor, conn)
                 except Exception as e:
                     print(
-                        '🚫ERROR -> Quoted tweet not found, probably deleted...adding placeholder... EXCEPTION: ' + str(
+                        'ERROR -> Quoted tweet not found, probably deleted...adding placeholder... EXCEPTION: ' + str(
                             e))
                     # print(quote_user_id)
                     cursor.execute('INSERT INTO tweet(tweet_id, text, "user", is_retweet) VALUES (%s,%s,%s,%s)',
@@ -201,16 +201,16 @@ def tweet_add(status, cursor, conn) -> bool:
                 # if it is already added we add the new tweet only.
                 pass
         if reply_to_tweet is not None:
-            print('💡INFO -> Reply Tweet')
+            print('INFO -> Reply Tweet')
             cursor.execute('SELECT * FROM tweet WHERE tweet_id = %s', (reply_to_tweet,))
             if len(cursor.fetchall()) == 0:
-                print('⚠️WARN -> Reply Tweet not on DB...fetching... ' + reply_to_tweet)
+                print('️WARN -> Reply Tweet not on DB...fetching... ' + reply_to_tweet)
                 try:
                     to_send = api.get_status(reply_to_tweet)
                     tweet_add(to_send, cursor, conn)
                 except Exception as e:
                     print(
-                        '🚫ERROR -> Reply tweet is unavailable! ... adding with default values + EXCEPTION: ' + str(e))
+                        'ERROR -> Reply tweet is unavailable! ... adding with default values + EXCEPTION: ' + str(e))
                     if reply_to_user is None and reply_to_tweet is None:
                         cursor.execute('INSERT INTO tweet (tweet_id, "user", text) VALUES (%s, %s, %s)',
                                        (random.randint(1, 100000), 1, 'N/A'))
@@ -241,7 +241,7 @@ def tweet_add(status, cursor, conn) -> bool:
                     if len(cursor.fetchall()) == 0:
                         cursor.execute('INSERT INTO hashtags(tweet_id, hashtag_id) VALUES (%s, %s)',
                                        (tweet_id, hashtag_uuid))
-                    print('💡INFO -> Adding new hashtag')
+                    print('INFO -> Adding new hashtag')
                     conn.commit()
                 else:
                     # Just add the relation to the hashtags table
@@ -258,7 +258,7 @@ def tweet_add(status, cursor, conn) -> bool:
             for mention in user_mentions_to_tag:
                 cursor.execute('SELECT user_id FROM users WHERE user_id = %s', (str(mention),))
                 if len(cursor.fetchall()) == 0:
-                    print('⚠️WARN -> User is not in DB, searching in Twitter...' + str(mention, ))
+                    print('️WARN -> User is not in DB, searching in Twitter...' + str(mention, ))
                     try:
                         user_fetch = api.get_user(str(mention, ))
                         add_user_if_non_existent(user_fetch, cursor, conn)
@@ -266,7 +266,7 @@ def tweet_add(status, cursor, conn) -> bool:
                                        (tweet_id, mention))
                         conn.commit()
                     except Exception:
-                        print('🚫ERROR -> User not found, using placeholder values')
+                        print('ERROR -> User not found, using placeholder values')
                         cursor.execute('INSERT INTO mentions(tweet_id, mentions_user) VALUES (%s, %s)',
                                        (tweet_id, 1))
                         conn.commit()
@@ -283,7 +283,7 @@ def tweet_add(status, cursor, conn) -> bool:
                     conn.commit()
             return True
     else:
-        print('💡INFO -> Tweet already added...skipping')
+        print('INFO -> Tweet already added...skipping')
         return False  # Como el tweet ya esta en la base de datos, no lo tenemos que agregar y nos saltamos de usuario.
 
 
@@ -307,16 +307,16 @@ def retrieve_user_tweets():
                 try:
                     # input('do you want to continue')
                     # pBar.set_description("Processing tweets from " + user[2])
-                    print('💡INFO -> Fetching user ' + user[2])
+                    print('INFO -> Fetching user ' + user[2])
                     for status in Cursor(api.user_timeline, id=user[0]).items():
                         stat = tweet_add(status, cursor, connection)
                         uT += 1
                         if not stat:
-                            print('💡INFO -> CHANGING user that is being queried')
+                            print('INFO -> CHANGING user that is being queried')
                             break
                     print('Tweets queried for ' + str(user[2]) + ' ' + str(uT))
                 except Exception as ex:
-                    print('🚫ERROR -> User account does not exist or is private. (when querying) ' + str(ex))
+                    print('ERROR -> User account does not exist or is private. (when querying) ' + str(ex))
         # pBar.update(1)
     print('Finished querying tweets from ' + str(num_users) + ' users.')
     # pBar.close()
