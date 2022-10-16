@@ -4,9 +4,9 @@ Copyright Jaime Hisao, April 2020
 
 This code should not be used for malicious purpose and the creator is not held responsible in any case.
 """
-from config import create_api
-import mongoer
 from datetime import datetime
+
+import config
 
 '''
 Methods contained in this file
@@ -22,7 +22,7 @@ don't to a Twitter Type ID.
 
 def uuid_to_twitter_id():
     # Defunct method that changes the UUID to a Twitter type ID. Used in the past but not at often.
-    api = create_api()
+    api = config.create_api()
     mongo = str.mongoer.Mongo()
     users = mongo.returnOptedInUsersCollection()
     for user in users.find({}):
@@ -37,7 +37,7 @@ def uuid_to_twitter_id():
 def user_changed_username() -> None:
     """This code runs to see if a user changed its username (@user) in Twitter, and update the DB accordingly."""
     uuid_to_twitter_id()  # To run this, users have to have their Twitter ID, so we run that first.
-    api = create_api()
+    api = config.create_api()
     mongo = mongoer.Mongo()
     opted_users = mongo.return_opted_in_user_collection()
     for user in opted_users.find({}):
@@ -89,7 +89,7 @@ def list_users():
 
 # Adds a new user, in a one by one basis.
 def add_new_user(usr) -> None:
-    api = create_api()
+    api = config.create_api()
     mongo = mongoer.Mongo()
     user_temp = None
     opted_in_database = mongo.return_opted_in_user_collection()
@@ -97,7 +97,7 @@ def add_new_user(usr) -> None:
     # Checks if the user id exists in Twitter and throws exception if otherwise.
     try:
         user_temp = api.get_user(usr)
-    except:
+    except Exception:
         print('User does not exist.')
     else:
         print('Adding ' + user_temp.id_str + ' with screenName ' + user_temp.screen_name)
@@ -112,28 +112,5 @@ def add_new_user(usr) -> None:
             pass
         else:
             print('User ' + user_temp.screen_name + ' added successfully')
-        '''
-        try:
-            user['_id'] = str(uTemp.id) 
-            user['screenName'] = uTemp.screen_name 
-            user['addedAt'] = datetime.utcnow()
-            user['followersCount'] = uTemp.followers_count
-            user['friendsCount'] = uTemp.friends_count
-            user['createdAt'] = uTemp.created_at
-            user['favouritesCount'] = uTemp.favourites_count
-            user['statusesCount'] = uTemp.statuses_count
-            optedInDatabase.insert_one(user)
-        except:
-            print('Error when trying to add User...Likely a duplicate!')
-        '''
     del mongo
 
-
-'''
-#Main, mostly for testing purposes.
-mongo = mongoer.Mongo()
-userTweets = mongo.returnTwitterUserTweetsCollection()
-while True:
-    inp = input()
-    addNew(inp)
-'''

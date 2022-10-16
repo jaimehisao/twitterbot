@@ -1,9 +1,9 @@
-'''
-streaming.py by Jaime Hisao Yesaki 
+"""
+streaming.py by Jaime Hisao Yesaki
 Program that connects to the Twitter API and streams tweets instead of querying them in timely intervals.
 Created September 3, 2019
 Version 0.1
-'''
+"""
 import sys
 from config import create_api
 from tweepy import Stream
@@ -25,16 +25,16 @@ class Listener(StreamListener):
 
 api = create_api()
 
-output = open('stream_output.txt', 'w')
+output = open("stream_output.txt", "w")
 listener = Listener(output_file=output)
 
 stream = Stream(auth=api.auth, listener=listener)
 try:
-    print('Start streaming.')
-    stream.sample(languages=['en'])
+    print("Start streaming.")
+    stream.sample(languages=["en"])
 except KeyboardInterrupt:
     print("Stopped by user.")
 finally:
-    print('Done.')
+    print("Done.")
     stream.disconnect()
     output.close()

@@ -3,13 +3,13 @@ import pprint
 import pymongo
 import psycopg2
 
-old = pymongo.MongoClient("mongodb://services.hisao.org:27017/")
+old = pymongo.MongoClient("mongodb://databases.prod.hisao.org:27017/")
 
 connection = None
 try:
     connection = psycopg2.connect(user="twitteruser",
                                   password="twitterT343432434@",
-                                  host="services.hisao.org",
+                                  host="databases.prod.hisao.org",
                                   port="5432",
                                   database="twitter")
 

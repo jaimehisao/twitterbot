@@ -6,9 +6,8 @@ Version 0.1
 """
 import logging
 from textgenrnn import textgenrnn
-from commonUtils import process_text
+import tweetOperations
 
-import mongoer
 
 '''
 We could also add a functionality that can, based on a Tweet add more users to base our tweets upon
@@ -46,7 +45,7 @@ def generate_tweet():
         if tweet['screenName'] == 'marin_chavarria':  # TRY AND CATCH IF ARR IS EMPTY
             if True:
                 if tweet['isRetweet'] is not True:
-                    tweet_text = process_text(tweet['text'])
+                    tweet_text =tweetOperations.process_text(tweet['text'])
                     if tweet_text is not '':
                         texts.append(tweet_text)
                         contextLabels.append('all')

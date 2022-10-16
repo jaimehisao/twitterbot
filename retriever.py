@@ -7,7 +7,6 @@ import uuid
 from tweepy import Cursor
 import psycopg2
 import psycopg2.extras
-# import tqdm
 
 # Homemade Classes import
 import config
