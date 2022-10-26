@@ -23,7 +23,7 @@ def like_my_tweets_local(api, since_id) -> None:
                 api.create_favorite(tweet.id)
                 toSend = 'Tweet with ' + str(tweet.id) + "liked!"
                 logger.info(toSend)
-            except tweepy.TweepError:
+            except tweepy.errors.Forbidden:
                 logger.info("You've already liked this tweet...")
                 break
 

@@ -26,8 +26,7 @@ def create_api():
     # Handle authentication
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth, wait_on_rate_limit=True,
-                     wait_on_rate_limit_notify=True)
+    api = tweepy.API(auth, wait_on_rate_limit=True)
 
     # Try and catch for credentials, if not possible returns a generic error and prints trace
     try:
@@ -42,9 +41,9 @@ def create_api():
 
 
 def connect_to_db():
-    connection = psycopg2.connect(user="twitteruser",
-                                  password="twitterT343432434@",
-                                  host="services.hisao.org",
+    connection = psycopg2.connect(user="apps",
+                                  password="apps_for_postgres_prod",
+                                  host="databases.prod.hisao.org",
                                   port="5432",
                                   database="twitter")
     return connection
