@@ -12,6 +12,8 @@ import sys
 
 import sentry_sdk
 
+import likeMyTweets
+
 sys.path.append('/usr/code/src')
 
 sentry_sdk.init("https://75642e664d814773b15d11fa487da198@o285082.ingest.sentry.io/5307624")
@@ -38,7 +40,6 @@ schedule.every().hour.at(":05").do(retrieve_user_tweets)  # Download new tweets
 
 # This will run always, checking the scheduler to see if a piece of code has to run at the specified hour and minute,
 # otherwise, go to sleep
-while True:
-    # print(sys.path)
-    schedule.run_pending()
-    time.sleep(1)
+
+retrieve_user_tweets()
+likeMyTweets.like_my_tweets()
