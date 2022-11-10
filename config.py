@@ -26,7 +26,7 @@ def create_api():
     # Handle authentication
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth, wait_on_rate_limit=True)
+    api = tweepy.API(auth)
 
     # Try and catch for credentials, if not possible returns a generic error and prints trace
     try:
