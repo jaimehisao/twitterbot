@@ -42,4 +42,4 @@ schedule.every().hour.at(":05").do(retrieve_user_tweets)  # Download new tweets
 # otherwise, go to sleep
 
 retrieve_user_tweets()
-likeMyTweets.like_my_tweets()
+#likeMyTweets.like_my_tweets()
