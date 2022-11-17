@@ -316,7 +316,7 @@ def retrieve_user_tweets():
                             print('INFO -> CHANGING user that is being queried')
                             break
                     print('Tweets queried for ' + str(user[2]) + ' ' + str(uT))
-                    sleep(100)
+                    sleep(50)
                 except Exception as ex:
                     print('ERROR -> User account does not exist or is private. (when querying) ' + str(ex))
         # pBar.update(1)
