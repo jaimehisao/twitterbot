@@ -182,7 +182,7 @@ def tweet_add(status, cursor, conn) -> bool:
             print('INFO -> Quoted Tweet')
             cursor.execute('SELECT * FROM tweet WHERE tweet_id = %s', (quote_tweet_id,))
             if len(cursor.fetchall()) == 0:  # if the quoted tweet is not on the database, add it
-                print('INFO -> Quoted tweet is non on the DB...adding ' + str(quote_tweet_id))
+                print('INFO -> Quoted tweet is not on the DB...adding ' + str(quote_tweet_id))
                 try:
                     if quote_tweet_id is not None:
                         to_send = api.get_status(quote_tweet_id)
